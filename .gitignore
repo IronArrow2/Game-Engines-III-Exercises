@@ -1,0 +1,16 @@
+
+Library/
+
+.vs/
+
+Logs/
+
+obj/
+
+Temp/
+
+.vsconfig
+
+Assembly-CSharp.csproj
+
+Game Engines III Exercises.sln
