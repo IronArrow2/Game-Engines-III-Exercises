@@ -1826,6 +1826,75 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1488734825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1488734827}
+  - component: {fileID: 1488734826}
+  m_Layer: 0
+  m_Name: BringerOfDeath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1488734826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488734825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c77cf8ce776f943901c84127c7b719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 40
+  physicalArmour: 5
+  magicResistance: 20
+  damage: 20
+  characterImage: {fileID: 975020931}
+  physicalAttackAnim: {fileID: 7400000, guid: 91ea4f426e57ae142a9edbcaa3dbda96, type: 2}
+  magicalAttackAnim: {fileID: 0}
+  statBoostAnim: {fileID: 0}
+  utilityAnim: {fileID: 0}
+  characterAnimator: {fileID: 975020933}
+  turnEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1880381489}
+        m_TargetAssemblyTypeName: BattleController, Assembly-CSharp
+        m_MethodName: EnemyTurnEnded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &1488734827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488734825}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1501669067
 Mesh:
   m_ObjectHideFlags: 0
@@ -2883,6 +2952,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cd62f69df46cc479a11c5de04ce1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 50
+  physicalArmour: 5
+  magicResistance: 10
+  damage: 25
+  characterImage: {fileID: 1425713255}
+  physicalAttackAnim: {fileID: 7400000, guid: 0545419bc9ecbaa4dad29c7c4018a2ef, type: 2}
+  magicalAttackAnim: {fileID: 7400000, guid: 5971894a3fa52ec4b944e8e3104ebf89, type: 2}
+  statBoostAnim: {fileID: 7400000, guid: 79f5abea50370eb4ca19ea4f0822dece, type: 2}
+  utilityAnim: {fileID: 7400000, guid: 588616e96d401cd418ba4203f9c921a6, type: 2}
+  characterAnimator: {fileID: 1425713257}
+  turnEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1880381489}
+        m_TargetAssemblyTypeName: BattleController, Assembly-CSharp
+        m_MethodName: Flee
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &1804724108
 Rigidbody2D:
   serializedVersion: 4
@@ -2987,9 +3081,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleScreen: {fileID: 1221043406}
-  playerImage: {fileID: 1425713255}
-  enemyImage: {fileID: 975020931}
-  playerAnimator: {fileID: 1425713257}
+  player: {fileID: 1804724107}
+  enemy: {fileID: 1488734826}
+  enemyPrefabs:
+  - {fileID: 1488734825}
 --- !u!4 &1880381490
 Transform:
   m_ObjectHideFlags: 0

@@ -5,17 +5,16 @@ using UnityEngine.UI;
 
 public class BattleController : MonoBehaviour
 {
+    private bool isPlayerTurn = true;
+
     [SerializeField]
     Canvas battleScreen;
 
-    [SerializeField]
-    Image playerImage;
+    public PlayerController player;
 
-    [SerializeField]
-    Image enemyImage;
+    public EnemyController enemy;
 
-    [SerializeField]
-    Animator playerAnimator;
+    public List<GameObject> enemyPrefabs;
 
     // Start is called before the first frame update
     void Start()
@@ -26,50 +25,64 @@ public class BattleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AttackButtonClicked()
     {
-        playerAnimator.Play("PlayerAttack1");
+        if(isPlayerTurn)
+        {
+            player.PlayPhysicalAttackAnim();
+            PlayerTurnEnded();
+        }
     }
 
     public void SpecialAttackButtonClicked()
     {
-        playerAnimator.Play("PlayerAttack2");
+        if(isPlayerTurn)
+        {
+            player.PlayMagicalAttackAnim();
+            PlayerTurnEnded();
+        }
     }
 
     public void DefendButtonClicked()
     {
-        playerAnimator.Play("PlayerGuard");
+        if(isPlayerTurn)
+        {
+            player.PlayStatBoostAnim();
+            PlayerTurnEnded();
+        }
     }
 
     public void FleeButtonClicked()
     {
-        playerAnimator.Play("PlayerRun");
-        playerImage.transform.Rotate(0, 180, 0);
-        StartCoroutine(Flee());
+        if(isPlayerTurn)
+        {
+            player.PlayUtilityAnim();
+        }
     }
 
     public void BattleTriggered()
     {
         Debug.Log("Battle time!");
+        isPlayerTurn = true;
         battleScreen.gameObject.SetActive(true);
     }
 
-    IEnumerator Flee()
+    public void PlayerTurnEnded()
     {
-        Vector3 playerPos = playerImage.transform.position;
-        for(float f = 0; f <= 1.0f; f += Time.deltaTime)
-        {
-            playerImage.transform.position -= new Vector3(500.0f * Time.deltaTime, 0, 0);
-            yield return null;
-        }
+        isPlayerTurn = false;
+        enemy.TakeTurn();
+    }
 
+    public void EnemyTurnEnded()
+    {
+        isPlayerTurn = true;
+    }
 
-        playerImage.transform.Rotate(0, -180, 0);
-        playerImage.transform.position = playerPos;
+     public void Flee()
+    {
         battleScreen.gameObject.SetActive(false);
-        yield break;
     }
 }
